@@ -1,0 +1,397 @@
+1. Elegir flavor
+	Ubuntu Mate porque es ligero y porque lo recomienda Chomp. https://ubuntu-mate.org
+	Varias personas me recomendaron Linux Mint, la verdad es que me da mucha fiaca buscar alternativas si este ya funciona
+
+2. Setup entorno
+2.1. Fondo de escritorio y pantalla de bloqueo (login), monitores
+	Para que un fondo de pantalla ancho se use en los 2 monitores hay que usar el estilo "Expandir"
+	El tema es que si usás la configuración extendida con un fondo largo, si desconectás la 2da pantalla te queda una franjita finita en el monitor ppal. La verdad bastante choto eso.
+	Los archivos de fondo de pantalla están guardados en /usr/share/backgrounds/ubuntu-mate-common/ . Conviene que los archivos de fondo de pantalla estén guardados ahí, pero a mi me gusta más que queden en mi carpetita de images/bg así los conservo cuando me mudo de compu.
+
+	El fondo de pantalla de login no sé cómo cambiarlo. La pantalla de bloqueo es otra cosa diferente.
+
+2.2. Themes, icons, fuentes, accesibilidad
+	curiosidad: probar HUD #TBD
+
+2.3. Paneles de escritorio
+	Me hubiera gustado un Dock como el de mac que me parece re chuchi pero todos los que probé andaban como el culo, así que me quedé con un único panel ocultable tradicional abajo.
+	Me gusta que haya la menor cantidad posible de elementos. Puse Ventanas abiertas, menú de aplicaciones, indicadores completos, navegación entre escritorios.
+	Me gusta que se oculte con animación, me gusta especialmente cómo quedan los docks, hay uno que se llama "Plank" intenté configurarlo y fue un bardo, qiuzás lo intente después con más paciencia.
+
+2.3.1. Menú de Favoritos
+	Navegadores, IDES, stremio, chat, calendario, atajos, aplicaciones al inicio, software, terminal
+
+2.4. Atajos de teclado
+	Probé varios #TBD
+
+2.5. Notificaciones de sistema
+	Chats, calendario, batería
+	Me gustaría recibir notificaciones de apps que sólo funcionan en navegador, estoy pensando en descargar una app separada para eso porque no quiero tener abierto Firefox.
+
+2.6. Configuración de energía
+	Me gustaría poder elegir la cantidad de minutos de espera antes de atenuar brillo, así que lo desactivé... o eso creía porque sigue pasando UGH!
+	Lo bueno es que no se activa cuando está andando video en pantalla grande, si no sería un problemón. Sí se activa cuando desenchufo el cable.. ¿cuándo se termina este calvario?
+
+3. Gestión de aplicaciones
+3.1. Instalar cosas
+	#APT
+	https://www.debian.org/doc/manuals/apt-guide/index.es.html
+	Antes de instalar cualquier cosa con apt primero hay que correr
+	>	sudo apt update
+	>	sudo apt upgrade
+
+	Y recién ahí
+	>	sudo apt install [nombre_de_paquete]
+
+	Para desinstalar el programa. "remove" desinstala y "purge" elimina archivos de configuración. Pueden usarse juntos o por separado:
+	>	sudo apt --purge remove [nombre_de_paquete]
+	>	sudo apt remove [nombre_de_paquete]
+	>	sudo apt purge [nombre_de_paquete]
+
+	Actions of the apt command, such as installation and removal of packages, are logged in the /var/log/dpkg.log log file.
+	El comando "apt-get" es backward compatible (más exigente) mientras que "apt" solo es más accesible
+	El parámetro -y sirve para que le dé todo que sí cuando pregunta si quiero avanzar y así poder ignorar un rato la consola confiando en que no se va a detener por eso
+
+
+	#Apptitude
+	https://www.debian.org/doc/manuals/aptitude/index.es.html
+	Install Aptitude
+	>	sudo apt install aptitude
+	You can start the menu-driven interface of Aptitude as a regular user by typing the following command at a terminal prompt:
+	>	sudo aptitude
+	When Aptitude starts, you will see a menu bar at the top of the screen and two panes below the menu bar. The top pane contains package categories, such as “New Packages” and “Not Installed Packages”. The bottom pane contains information related to the packages and package categories.
+	>	sudo aptitude install [nombre_del_paquete]
+	To remove the same package, you would use the command:
+	>	sudo aptitude remove [nombre_del_paquete]
+
+	#Snap
+	Data piola en https://documentation.ubuntu.com/core/snaps
+
+	>	sudo apt install snapd
+	>	sudo snap refresh # Análogo a apt update
+	>	sudo snap install [nombre_del_paquete o ruta_al_archivo/archivo_de_instalación.snap]
+        >       snap list
+
+	Para eliminar paquetes de snap
+	>	sudo snap remove --purge [nombre_del_paquete]
+
+	Para eliminar Snap
+	>	sudo apt purge snapd
+	>	sudo rm -rf ~/snap /snap /var/snap /var/lib/snapd
+
+
+
+        #Flatpak
+	Flatpak no viene instalado así que hay que instalarlo junto a sus repositorios
+	>	sudo apt install flatpak
+	>	sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+	Si quiero poder buscar e instalar paquetes de flatpak desde la interfaz de GNOME tengo que instalar el plugin
+	>	sudo apt install gnome-software-plugin-flatpak
+
+	Si quiero seguir trabajando desde la terminal uso el ID de la aplicación en el repositorio flathub. Primero busco la aplicación por su nombre y luego elijo la ID correspondiente
+
+	>	sudo flatpak update
+
+	>	flatpak search [nombre_de_la_aplicación]
+	>	flatpak install flathub [ID_de_la_aplicación]
+
+	Si tengo un archivo descargado "nombre_del_archivo.flatpakref"
+	>	flatpak install  [ruta_al_archivo/nombre_del_archivo.flatpakref]
+
+	Para ver las aplicaciones instaladas por Flatpak y sus IDs
+	>	flatpak list
+
+	Para correr una aplicación a través de flatpak
+	>	flatpak run [ID_de_la_aplicación]
+
+	Para desinstalar una aplicación uso "uninstall" y si quiero también eliminar la configuración relacionada agrego "--delete-data"
+	>	sudo flatpak uninstall --delete-data [ID_de_la_aplicación]
+
+	Los archivos instalados por flatpak están en
+	/var/lib/flatpak/
+	~/.local/share/flatpak/  # User installations
+
+	Se generan archivos .desktop automáticamente durante la instalación y se guardan en
+	/var/lib/flatpak/exports/share/applications/
+	~/.local/share/applications/ # User installations
+
+	#Comprimidos Tar.*
+	Primero hay que desempaquetarlo (extraer, como un comprimido .rar). Es una buena práctiva verificar la integridad de ese tar por las dudas, y recién después extraer la carpeta en donde una quiera.
+	>	sha256sum <name_of_the_tar_gz_file>
+	>	tar -xzvf <name_of_the_tar_gz_file>
+	The -x option is used to extract the files, -z indicates that the file is compressed with gzip, -v provides verbose output (shows the files being extracted), and -f specifies the file to extract.
+
+	Luego hay que compilar el código fuente que viene dentro.
+	>	cd <extracted_directory>
+	>	sudo ./configure # verifica dependencias y crea el archivo de compilación
+		Alternativa para indicar dónde crear el archivo de compilación
+		>	sudo ./configure --prefix=/path/to/installation/directory
+	>	sudo make #compila
+	>	sudo make install #instala globalmente
+
+	Una vez compilado se puede también simplemente copiar el archivo binario a la carpeta que una quiera.
+	>	sudo cp <binary_file> /usr/local/bin/  # User installations
+	>	sudo cp <binary_file> var/bin/ #TBD checkear
+
+
+
+	#Comprimidos Tar.zst
+	Mismos pasos que con Tar.gz pero con estos parámetros:
+	>	tar --use-compress-program=unzstd -xvf archive.tar.zst
+
+	O con estos:
+	>	tar --zstd -xvf archive.tar.zst
+
+
+	Cuando ya instalaste todo y terminaste con el asunto, verificaste que todo anda sin dramas, hay que limpiar las cosas que quedaron en el proceso
+	>	rm -r <extracted_directory>
+	>	rm <name_of_the_tar_gz_file>
+
+
+	#Deb (dpkg)
+	Son paquetes "Debian", se instalan con dpkg.
+
+	Los sistemas de gestión de paquetes como "apt" o "apptitude" están construidos sobre dpkg y agregan capas de funcionalidades como descarga automática de paquetes y sus dependencias. Por eso conviene usar alguno de estos dos para desinstalar ya que dpkg no desinstala dependencias.
+
+	Instalar
+	>	sudo dpkg -i [ruta_al_archivo_local]/[nombre_del_archivo.deb]
+	Desinstalar
+	>	sudo dpkg -r [nombre_del_paquete]
+
+	Configurar desde /etc/apt/sources.list.d/ubuntu.sources
+
+
+	Si quiero instalar archivos .deb con un programita con GUI puedo usar Gdebi
+
+	#Cmake
+	https://linuxcapable.com/how-to-install-cmake-on-ubuntu-linu
+	Install CMake on Ubuntu when you need a cross-platform build system generator for C and C++ projects. CMake turns a single CMakeLists.txt into build files for Make, Ninja, and IDEs, so you can keep one configuration across local development, CI, and different operating systems. Ubuntu 24.04 LTS includes CMake 3.28.x and Ubuntu 22.04 LTS ships 3.22.x in the default repositories; for the latest upstream release (currently 4.2.x), use Kitware’s APT repository, Snap, or a source build.
+
+	Run the script any time you want to check for updates:
+	>	~/cmake-src/update-cmake.sh
+
+
+
+
+3.2. Repositorios
+	https://help.ubuntu.com/community/Repositories/Ubuntu
+
+	#Repositorios permitidos
+	Podemos encontrar ls lista de repositorios acá.	Si alguno rompe las bolas con 404 o temas de claves GPG durante el proceso de "apt update" podemos borrarlo (o renombrarlo si somos más delicadas) desde
+	/etc/apt/sources.list.d/
+	/etc/apt/trusted.gpg.d/
+	Terminar #TBD
+
+	#GPG para repositorios
+	Encontramos NUESTRA Key acá:
+	/etc/apt/sources.list.d/ubuntu.sources
+	ver más en https://documentation.ubuntu.com/security/software-integrity/archive-verification/
+	Si no está necesitamos crearla con Keyring #TBD
+
+
+
+
+3.3. Ejecución
+3.3.1. Alias
+	Genera un alias para abrir un archivo desde la terminal con una aplicación en particular o para correr cualquier comando largo
+
+	En el archivo ~/.bashrc se agrega una línea que diga
+	>	alias [nombre_del_alias]="[path_a_la_aplicación]"
+	O si no desde la terminal con el comando
+	>	alias [nombre_corto]="[comando_largo_o_ruta_a_la_aplicación]"
+	Para eliminar esa asociación
+	>	unalias [alias_que_ya_no_quiero]
+
+3.3.2. Apps que se abren al inicio y monitoreo de procesos
+	En el directorio ~/.config/autostart están los archivos .desktop que apuntan a cada app que se ejecuta al inicio. Hay otras ubicaciones. #TBD
+
+3.3.3. Mimetypes
+	¿Qué programas abren cada tipo de archivo? ¿Desde dónde se modifica eso? #TBD
+
+3.3.4. Permisos chmod
+	Sobre archivos y carpetas puntuales. #TBD
+	¿Cómo evito que el sistema intente ejecutar archivos .txt? Sé que no es por acá pero no sé ni con qué keyword buscar info al respecto #TBD
+
+4. Aplicaciones en uso
+
+4.1. Terminal
+4.1.1. Emuladores
+	Probé Tilda... me gusta la idea de la terminal dockerizada pero nunca sabía si se había iniciado y estaba oculta o si no estaba iniciada, se reseteaban las configuraciones, una fiaca bárbara todo! me quedo con la terminal del SO, menos fancy pero confiable.
+	Sería bueno que queden abiertas las pestañas de la sesión anterior con los archivos abiertos.
+	Instalé Guake porque me gusta que tenga la funcionalidad dropdown y recuerde los tabs abiertos la sesión anterior (cosa que el mate terminal no ofrece).
+	Posibles mejoras:
+	- Algo que no me gusta de Guake es que para cambiar el ancho o alto de la ventana tengo que meterme en las configuración de preferencias y modificarlo poniendo un porcentaje a ojo, sin tener claro cómo va a quedar luego de implementarlo. Sería ideal poder modificar el ancho o alto usando el mouse y arrastrando el borde como hago con las ventanas de otras aplicaciones.
+	- Nombre de las pestañas: me ofrece ponerle el nombre de la carpeta donde estoy parada pero yo quiero que por ejemplo si estoy leyendo un archivo con nano que me muestre el nombre del archivo o si estoy corriendo un comando que diga cuál comando estoy corriendo ahí... por ahora puedo cambiarle yo el nombre manualmente haciéndole dobleclick pero qué sé yo.
+
+
+
+4.1.2. Configuración
+	Background translúcido <50% opacidad.
+	Dropdown para ocultar pero siempre abierto desde el inicio.
+	Colores default para el OS: Tango. Me viene bien.
+
+
+4.1.3. Diferentes Terminales
+	Ṭerminales? ¿motores? ¿Qué son? #TBD
+	Bash o Shell ¿cuál es la diferencia? ¿por qué elegiría uno u otro? #TBD
+
+4.2. Oficina
+4.2.1. Libre office - hay que instalar por separado las diferentes aplicaciones (docs, planillas de cálculo, presentaciones, etc). No vienen instaladas, por eso aparecen grisadas.
+4.2.1.1. Libre office Calc
+	Complicado el tema de los estilos, los atajos de teclado son inentendibles, no encuentro las cosas que necesito en los menúes y me enfurece que no se pueda editar una celda ya escrita, tenés que sobre escribirla o ir con el mouse hasta la barra de fórmulas para cambiar su contenido. INCOMODÍSIMO!!!
+4.2.1.2. Mathnoséqué ... vamuaver #TBD
+
+4.2.2. Calendario
+	Gnome Calendar está bien y sincroniza con el de googlecal pero no escribe, sólo lee. Lo bueno es que la barrita de indicadores completa tiene un acceso directo al calendario y muestra los eventos próximos y por fecha. Muy piola eso. También tiene un calendario propio pero no sé cómo hacer para ver esos eventos desde mi celular.
+	Desde el 3 de marzo dejó de abrir la aplicación de escritorio. En la página de la app "Software" los reviews corroboran mi experiencia. Voy a seguir usando google calendar desde el navegador firefox para el manejo del calendario en general (por las funcionalidades de su gui) y calendar de gnome para las notificaciones de escritorio que son muy convenientes.
+
+4.2.3. Editores de texto
+	nano, vim, pluma, notepad++, sublime text, ¿gedit?, ¿atom?...¿Cuál? ¿por qué? #TBD
+	Priorizo:
+	- ligereza y simpleza visual,
+	- compatibilidad (syntax hightlight) para R, python, html, markdown, sql
+	- consola de para renderizar los resultados de los comandos incluida
+	- entorno visual de archivos
+	- deseable git gui
+
+
+	#Nano
+	Por ahora me quedo con nano en la consola, pero sería ideal poder verlas sin tener que abrirlas. Para establecer wrapping del texto dentro del editor hay que modificar el archivo ~/.nanorc agregando la siguiente línea:
+	>	set softwrap
+	Si fuera necesario desactivar hardwrapping, primero habría que forzar nowrap y luego softwrap
+	>	set nowrap
+	>	set softwrap
+
+4.2.4. Notas rápidas
+	Me gustaría tener tipo post-its visibles en el escritorio. No un ícono de un archivo sino un cuadradito de max 300 chars pegado sobre el fondo de la pantalla. #TBD
+
+4.2.5. Email ????
+	Voy a seguir usando la aplicación de gmail para navegador. No lo uso tanto y no necesito las notificaciones ya que las veo siempre desde el celu.
+	Sería RE COPADO poder consultar el mail desde la terminal. Aparte sería súper cool. Hay un paquete que se llama mail que sirve para leer, filtrar y enviar. Parece piola, bien sencillo. Otro más sofisticado es mutt o neo mutt. ¿Cuál es la diferencia? #TBD http://www.mutt.org/doc/manual/#patterns. No sabría con qué criterio elegir uno u otro.  #TBD
+
+
+4.3. Internet
+4.3.1. Navegadores
+	Firefox, Brave
+	Buscador vs navegador ¿Por qué Duckduckgo no es un navegador aparte como en el celular? Si yo uso el buscador ddg ¿de quién me estoy ocultando? #TBD
+	Quiero settear Firefox como mi Browser default pero no me deja #TBD
+
+4.3.2. Seguridad, privacidad, constraseñas, sincronización
+	Firefox sincroniza contraseñas. Eso es muy práctico. Me sorprende que sea el navegador default de ubuntu. Tuve suerte de ya tenerlo en uso.
+	¿En dónde más necesito contraseñas? La sesión de sistema tiene una sola y la puedo recordar pero las demás definitivamente no. ¿Hay una mejor manera de almacenarlas? Igual las cosas importantes tienen 2FA e incluso 3 o 4. #TBD
+	¿Convendría instalar un autenticador diferente al de Google? #TBD
+
+
+4.3.3. Apps que sólo funcionan en navegador, por ejemplo whatsapp
+	Apps standalone:
+	- Tidal
+	- Telegram
+	- ... #TBD
+	En navegador
+	- Social: bsky, whatsapp
+	- Google: Gmail, Calendar, Drive, docs, sheets
+	- Microsoft: teams, outlook, sharepoint, onedrive
+
+	Me gustaría que haya una app standalone para no tener que tener firefox abierto para recibir notificaciones. ¿pros / cons? #TBD	Tangram parece dedicarse a eso, lo voy a probar y veré, por ahora un poco desilusionada con esto. Y cansada también. Veré cuán pesado se me hace. #TBD
+
+4.3.5. Chats y Videollamadas
+	Instalé Telegram. Anda bastante bien pero necesito que se prenda al inicio para que me aparezcan las notis cuando recibo mensajes. Una fiaca que no encuentre el lanzador. Por Tutatis! QUÉ ENORME PAJA no saber dónde están. Encima están todos desperdigados. GRRRRR!
+	Google Meet por firefox anda bastante mal, pero mejor que en Windows.
+
+4.4. Trabajo y facultad
+4.4.1. GIT, github, gitlab, autenticación, ssh
+	Instalo GitHub CLI (command gh) para que funcione como manager de credenciales. Puedo usar Git Credential Manager también como alternativa. A fines prácticos hoy por hoy las funcionalidades son idénticas
+	En el archivo ~/.gitconfig
+	>	[user]
+		name = Lucía Fresno
+		email = Lucíafresno@gmail.com
+		[credential "https://github.com"]
+		helper =
+		helper = !/usr/bin/gh auth git-credential
+		[credential "https://gist.github.com"]
+		helper =
+		helper = !/usr/bin/gh auth git-credential
+4.4.2 Datos
+	Alternativa a postman: hurl - instalado, por ser testeado #TBD
+
+4.4.2. IDEs -
+	Rstudio, Sublime text, Sublime merge, ¿otros? ¿plugins? ¿themes? #TBD
+
+
+
+4.4.4. Sync Nube de archivos
+	Rclone https://rclone.org/install/ es una opción interesante. La verdad no sé hasta qué punto la GUI es mejor que las apps de navegador. Aparte ¿con qué apps voy a abrir los archivos que pudiera llegar a visualizar?
+	Probé RcloneGui. Es una interfaz de navegador de una instancia de Rclone que corre localmente. Como interfaz es peor que la de Google. Me hubiera gustado que fue una integración con el explorador de archivos del SO, como en Windows, que sincronice para arriba y para abajo pero no encuentro la manera de lograr eso. Para ver cosas en el navegador me conecto al servicio decada nube ¿Cuál sería la ventaja de hacer esta pirueta? No funciona con el Sharepoint de la facultad. Lo desinstalé.
+	Probé también https://github.com/kapitainsky/RcloneBrowser pero no pude hacerlo andar. Parece que es de hace 20 años y está deprecadísimo.
+
+4.5. Entreteniemiento
+4.5.1. Video VLC
+4.5.2. Audio VLC
+4.5.3. Streaming video
+	Strem.io - Anda perfecto, mejor que en Windows, cero problema con los codecs.
+4.5.4. Transmission - OK
+4.5.5. Steam
+	Steam beta proton compatibilidades. Bastante bueno. El lag propio del rendimiento de hardware de la compu es inevitable. Quévacerle? Lo bueno es que ANDA!!! Tengo AOE y Little Nightmares <3.
+4.5.6. Streaming
+	OBS
+4.5.7 Imágenes
+	OJO
+	Gimp
+	Captura de pantalla (tengo que aprender a usarla). #TBD
+	Quiero un editor rápido para recortar y agregar texto nada más. Gimp es demasiado pesado. #TBD
+
+X. Otros
+X.1. comandos para encontrar cosas
+	- whereis
+	- grep
+	- which
+	- locate
+	- find
+	- otros #TBD
+
+	Ojo! Estos programas necesitan indexar primero para poder buscar. Para eso se corre el comando:
+	>	sudo updatedb
+
+	Es posible que los archivos a ser encontrados estén en un directorio FUSE (filesystem in userspace) o GVFS (GNOME virtual file system). Está bien, es un mecanismo de seguridad. Se puede configurar los archivos de configuración para excluir estas carpetas si molestan mucho desde los archivos etc/updatedb.conf or /etc/sysconfig/locate.
+
+	¿Cuál es la diferencia? #TBD
+
+X.2. PANTALLA TOUCH SIN PROBLEMAS!!! Explorar configuraciones #TBD
+
+
+X.3. Cosas importantes que no sé en qué categoría ponerlas
+
+X.3.1. Curl
+	"curl command is a tool to download or transfer files/data from or to a server using FTP, HTTP, HTTPS, SCP, SFTP, SMB and other supported protocols on Linux or Unix-like system."
+	>	 sudo apt install curl
+	OJO AL PIOJO: Por algún motivo snap instala su propio curl. Este curl no me sirve para cosas no relacionadas a snap (Qué poronga snap!). Lo tuve que desinstalar y buscar la versión oficial de ubuntu.
+
+X.3.2. Xorg #TBD	-
+
+X.3.3. Cositas de la terminal
+	Para limpiar la pantalla Ctrl+L o clear
+
+X.3.4. ssh
+https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+¿dónde queda referenciada la clave dentro del ssh-agent?
+
+
+X.3.5 Pipes
+https://documentation.ubuntu.com/desktop/en/latest/tutorial/the-linux-command-line-for-beginners/#
+That method works, but creating a temporary file to hold the output from ls only to delete it two lines later seems a little excessive. Fortunately the Unix command line provides a shortcut that avoids you having to create a temporary file, by taking the output from one command (referred to as standard output or STDOUT) and feeding it directly in as the input to another command (standard input or STDIN). It’s as though you’ve connected a pipe between one command’s output and the next command’s input, so much so that this process is actually referred to as piping the data from one command to another. Here’s how to pipe the output of our ls command into wc:
+user@computer:/tmp/tutorial$
+ls ~ | wc -l
+
+9
+
+Notice that there’s no temporary file created, and no file name needed. Pipes operate entirely in memory, and most Unix command line tools will expect to receive input from a pipe if you don’t specify a file for them to work on. Looking at the line above, you can see that it’s two commands, ls ~ (list the contents of the home directory) and wc -l (count the lines), separated by a vertical bar character (|). This process of piping one command into another is so commonly used that the character itself is often referred to as the pipe character, so if you see that term you now know it just means the vertical bar.
+
+Note that the spaces around the pipe character aren’t important, we’ve used them for clarity, but the following command works just as well, this time for telling us how many items are in the /etc directory:
+
+X.3.6 Kill processes
+	https://phoenixnap.com/kb/how-to-kill-a-process-in-linux
+
+X.4.1 R y Rstudio
+    Ver archivo ./R-curiosidades.md

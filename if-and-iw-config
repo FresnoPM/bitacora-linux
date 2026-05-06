@@ -1,0 +1,64 @@
+# ifconfig
+ 
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Bucle local)
+        RX packets 1559  bytes 165910 (165.9 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1559  bytes 165910 (165.9 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+wlp1s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.0.233  netmask 255.255.255.0  broadcast 192.168.0.255
+        inet6 2800:2132:5000:7de:108d:4853:f188:7e90  prefixlen 64  scopeid 0x0<global>
+        inet6 2800:2132:5000:7de:6b0f:5410:89c5:6f8a  prefixlen 64  scopeid 0x0<global>
+        inet6 2800:2132:5000:7de::5ebb  prefixlen 128  scopeid 0x0<global>
+        inet6 fe80::4c55:7f5:b925:d85b  prefixlen 64  scopeid 0x20<link>
+        ether 00:28:f8:04:be:38  txqueuelen 1000  (Ethernet)
+        RX packets 142079  bytes 176200398 (176.2 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 14879  bytes 4370198 (4.3 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+
+# iwconfig 
+lo        no wireless extensions.
+
+wlp1s0    IEEE 802.11  ESSID:"TheDreaming-5GHz"  
+          Mode:Managed  Frequency:5.3 GHz  Access Point: 4C:19:5D:D3:59:64   
+          Bit Rate=866.7 Mb/s   Tx-Power=22 dBm   
+          Retry short limit:7   RTS thr:off   Fragment thr:off
+          Power Management:off
+          Link Quality=64/70  Signal level=-46 dBm  
+          Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+          Tx excessive retries:0  Invalid misc:72   Missed beacon:0
+
+
+# nmcli device status
+DEVICE          TYPE      STATE                   CONNECTION       
+wlp1s0          wifi      conectado               TheDreaming-5GHz 
+lo              loopback  connected (externally)  lo               
+p2p-dev-wlp1s0  wifi-p2p  desconectado 
+
+
+
+# ethtool -i wlp1s0
+driver: iwlwifi
+version: 6.17.0-22-generic
+firmware-version: 36.ca7b901d.0 8265-36.ucode
+expansion-rom-version: 
+bus-info: 0000:01:00.0
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: no
+supports-priv-flags: no
+
+
+# lspci -nnk | grep -iA 3 net
+01:00.0 Network controller [0280]: Intel Corporation Wireless 8265 / 8275 [8086:24fd] (rev 78)
+	Subsystem: Intel Corporation Dual Band Wireless-AC 8265 [8086:1010]
+	Kernel driver in use: iwlwifi
+	Kernel modules: iwlwifi, wl

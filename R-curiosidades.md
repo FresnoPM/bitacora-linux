@@ -1,0 +1,154 @@
+
+
+
+
+Si un paquete no puede instalarse porque no puede acceder a un archivo que termina en *.so la cosa se soluciona, desde la terminal, corriendo R con permisos de sudo y, recién ahí, instalar el paquete:
+    >	$ sudo R
+    >	> install.packages("annoying-compiled-or-whatever-package")
+
+Lugares donde se guardan los paquetes instalados:
+
+>	> .libPaths()
+[1] "/home/lucia/R/x86_64-pc-linux-gnu-library/4.5"
+# Acá están las cosas que uso ad hoc
+
+[2] "/usr/local/lib/R/site-library"
+# vacío
+
+[3] "/usr/lib/R/site-library"
+# vacío
+
+[4] "/usr/lib/R/library"
+# Acá están las cosas importantes, por ej:
+#       codetools  survival  KernSmooth  utils  stat
+#       graphics spatial    mgcv   MASS  translation
+#       splines   grDevices   nnet  Matrix   foreign
+#       tools  parallel  datasets   class   nlme
+#       cluster   tcltk   methods  compiler rpart
+#       lattice   boot  stats4   grid   base
+
+
+Estoy usando renv, cada vez que instalo un paquete desde una sesión lo guardá acá:
+Installing package into ‘/home/lucia/R/x86_64-pc-linux-gnu-library/4.5’
+(as ‘lib’ is unspecified)
+
+Cuando cierro la sesión con q() me pregunta si quiero guardar la imagen. Si le digo que sí, crea un documento .RData #TBD ¿.RData depende de renv?
+Ese documento .RData lo puedo copiar y pegar en otra carpeta y conserva todo el historial y los paquetes instalados durante esa sesión. Reitero: durante la sesión todos los paquetes instalados se almacenan en el directorio público home/lucia/R/x86_64-pc-linux-gnu-library/4.5 , visibles y accesibles desde donde sea sin solicitar permisos. sin embargo, cuando estoy en un directorio en el que no está presente el documento .RData, al correr R el programa no reconoce los paquetes instalados durante la sesión anterior. #TBD ¿Por qué?
+
+
+después descubrí esto que me flasheó https://www.danieldsjoberg.com/starter/articles/create_project.html crea un proyecto de R sin rstudio (FABULOSO!)  y lo estructura con renv y git y toda la pompa con el comando:
+install.packages("starter")
+
+
+
+Cuando instalé el paquete project_starter con el comando:
+install.packages("starter")
+lo guardó en ‘/home/lucia/R/x86_64-pc-linux-gnu-library/4.5’
+
+pero después, una vez instalado activás el paquete, indicás el directorio donde vas a trabajar (si no existe lo crea)
+
+library(starter)
+project_path <- fs::path("~/Repos/renv-with-project-starter")
+
+y cuando cerrás y volvés a entrar te recibe con esta data:
+
+- Project '~/Repos/renv-with-project-starter' loaded. [renv 1.2.2.9000]
+* Your 'renv' project is not yet setup.
+
+y cuando usás renv::install todo es mágico
+renv::install('rmarkdown') 
+
+La cuestión es que recién ahí: dentro de este repositorio donde está iniciado project-starter, te arma un directorio renv/library que, a su vez, tiene una carpeta de amacenamiento de paquetes instalados dentro de esa sesión de renv
+
+These packages will be installed into "~/Repos/renv-with-project-starter/renv/library/linux-ubuntu-noble/R-4.5/x86_64-pc-linux-gnu".
+
+
+The general workflow when working with renv is: (https://docs.posit.co/ide/user/ide/guide/environments/r/renv.html)
+
+    Call renv::init() to initialize a new project-local environment with a private R library,
+
+    Work in the project as normal, installing and removing new R packages as they are needed in the project,
+
+    Call renv::snapshot() to save the state of the project library to the lockfile (called renv.lock),
+
+    Continue working on your project, installing and updating R packages as needed.
+
+    Call renv::snapshot() again to save the state of your project library if your attempts to update R packages were successful, or call renv::restore() to revert to the previous state as encoded in the lockfile if your attempts to update packages introduced some new problems.
+
+The renv::init() function attempts to ensure the newly-created project library includes all R packages currently used by the project. It does this by crawling R files within the project for dependencies with the renv::dependencies() function. The discovered packages are then installed into the project library with the renv::hydrate() function, which will also attempt to save time by copying packages from your user library (rather than reinstalling from CRAN) as appropriate.
+
+
+
+
+Permite armar templates para futuros proyectos pero es para otra ocasión. 
+https://www.danieldsjoberg.com/starter/articles/create_project.html
+
+Mi objetivo es armar un entorno de base con todos los paquetes que necesito para trabajar, hacer una copia y arrncar de ahí. Estoy seriamente considerando no usar rstudio. Quizás la terminal es muy oldschool al pedo pero quizás sublime esté bien como punto medio.
+
+
+
+
+
+Gestión de entornos compatibles con Rstudio:
+
+otro artículo interesante es este https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html donde describe diferentes maneras de aislar y controlar versiones y librerías de paquetes
+
+https://cran.r-universe.dev/toolero/doc/manual.html
+
+
+https://usethis.r-lib.org/
+https://usethis.r-lib.org/reference/proj_utils.html
+usethis is a workflow package: it automates repetitive tasks that arise during project setup and development, both for R packages and non-package pro
+Install the released version of usethis from CRAN:
+install.packages("usethis")
+Or install the development version from GitHub with:
+# install.packages("pak")
+pak::pak("r-lib/usethis")
+https://github.com/rstudio/r-system-requirement
+
+
+librerías que quiero
+library(palmerpenguins)
+library(nycflights13)
+stringr
+stringi
+tidyselect
+mime
+credentials
+
+askpass      downlit      ini        praise 
+base64enc       urlchecker
+brew         ellipsis     jsonlite   processx     rstudioapi     evaluat      profvis      R.utils
+bslib        fansi        later      rversions    vctrs
+cachem       fastmap      lifecycle  ps 
+callr        fontawesome  magrittr        sessioninfo
+cli          fs           memoise    R6             withr
+clipr        generics     mime       ragg      xfun
+commonmark   gert         miniUI     rappdirs     starter      xml2
+cpp11        gh           openssl    rcmdcheck    stringi      xopen
+crayon       gitcreds     Rcpp         stringr 
+credentials  glue         pak        renv         sys          yaml
+curl         highr        pillar     rlang        systemfonts  zip
+desc         htmltools    pkgbuild   rmarkdown    testthat
+devtools     htmlwidgets  pkgconfig  R.methodsS3  textshaping
+diffobj      httpuv       pkgdown    R.oo         tibble
+digest       httr2        pkgload    roxygen2     tidyselect
+
+
+
+
+
+
+
+
+
+
+
+setup repo posit en ~/.Rprofile
+options(repos = c(CRAN = sprintf("https://packagemanager.posit.co/cran/latest/bin/linux/noble-%s/%s", R.version["arch"], substr(getRversion(), 1, 3))))
+
+
+otros repos interesantes
+https://ropensci.r-universe.dev/
+https://cran.r-project.org/package=miniCRAN
+install.packages("renv", repos = "https://rstudio.r-universe.dev")

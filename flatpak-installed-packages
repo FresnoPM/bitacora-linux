@@ -1,0 +1,17 @@
+Brave	com.brave.Browser	1.89.143	stable	system
+Discord	com.discordapp.Discord	0.0.135	stable	system
+OBS Studio	com.obsproject.Studio	32.1.2	stable	system
+Stremio	com.stremio.Stremio	4.4.168	stable	system
+Visual Studio Code	com.visualstudio.code	1.116.0	stable	system
+Freedesktop Platform	org.freedesktop.Platform	freedesktop-sdk-25.08.10	25.08	system
+Mesa	org.freedesktop.Platform.GL.default	26.0.4	24.08	system
+Mesa (Extra)	org.freedesktop.Platform.GL.default	26.0.4	24.08extra	system
+Mesa	org.freedesktop.Platform.GL.default	26.0.5	25.08	system
+Mesa (Extra)	org.freedesktop.Platform.GL.default	26.0.5	25.08-extra	system
+Intel VAAPI driver	org.freedesktop.Platform.VAAPI.Intel		24.08	system
+Intel VAAPI driver	org.freedesktop.Platform.VAAPI.Intel		25.08	system
+Codecs Extra Extension	org.freedesktop.Platform.codecs-extra		25.08-extra	system
+openh264	org.freedesktop.Platform.openh264	2.5.1	2.5.1	system
+Freedesktop SDK	org.freedesktop.Sdk	freedesktop-sdk-25.08.10	25.08	system
+Yaru-MATE-light GTK theme	org.gtk.Gtk3theme.Yaru-MATE-light	20.10.1	3.22	system
+KDE Application Platform	org.kde.Platform		5.15-24.08	system

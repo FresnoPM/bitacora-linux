@@ -1,0 +1,53 @@
+#Acá hay ejecutables:
+
+
+	#Esto escupe $PATH:
+	- /usr/local/sbin
+	- /usr/local/bin
+	- /usr/sbin
+	- /usr/bin
+	- /sbin
+	- /bin
+	- /usr/games
+	- /usr/local/games
+	- /snap
+	- /snap/bin
+	- /usr/local/lib
+	- /usr/lib
+	Revisar qué hay ahí #TBD
+
+#Encontré archivos .desktop acá:
+~/.local/share/applications
+/usr/share/applications$ 
+~/.config/autostart
+	¿por qué se duplican? Esto es muy desprolijo #TBD
+	¿por qué algunos dice Exec=path/a/un/binario y otros dicen Exec=nombre-de-la-aplicación? ¿a qué path está haciendo referencia? ¿o acaso será que hay ooooootro documento de configuración y estos son aliases?
+
+
+#Detalle:
+~/.var/app/ tiene lo mismo que /.var/app/
+~/.local/share/applications tiene lo mismo que /.var/app/com.brave.Browser/data/applications
+
+Dice Facu Battista:
+	el local en los dirs del sistema (/var/local, /usr/local, etc) son para las cosas que no son "del sistema operativo en general" sino "locales a tu instalación" (aunque genéricas a todos los usuarios de tu máquina)
+
+
+#Existen pero están vacíos o no tienen nada relevante:
+/usr/share/flatpack
+~/.local/share/flatpak 
+/var/app/ 
+/var/lib 
+/var/lib/flatpak/app$ ls
+             com.brave.Browser  com.discordapp.Discord  com.obsproject.Studio  com.stremio.Stremio
+
+
+#Esto no existe:
+/usr/local/share/applications/
+
+
+
+#Revisar:
+./lib/xml-core/catalog
+./lib/xml-core/polkitd
+./lib/aspell/en-common.rws
+
