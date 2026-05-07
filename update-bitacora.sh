@@ -1,35 +1,41 @@
 #!/bin/bash
-#
 # INSTALLED PACKAGES BACKUP
 
+
+# Create log
+
+log='backup/packages-backup-log'
+
+
+if ${log+"false"};  then
+    # la variable no está seteada
+    echo "Please check file variable log."
+    return 1; else
+    if test ! -e "$log"; then
+    # files doesn't exists
+    # create it
+    touch "$log"
+    fi
+fi
+
+echo "--------------- Start log at: ---------------" >> $log
+date >> $log
+
 # Total packages
-
-echo "--------------- Start log at: ---------------" >> 'backup/update-log'
-date >> 'backup/update-log'
-
 dpkg_all="backup/dpkg-all-installed-packages"
 # Check Initial
 if ${dpkg_all+"false"};  then
     # la variable no está seteada
     echo "Please check file variable dpkg_all."
     return 1; else
-
     if test ! -e "$dpkg_all"; then
     # files doesn't exists
     # create it
     touch "$dpkg_all"
     fi
 fi
-echo '>>>   Initial # of packages total:' >> 'backup/update-log'
-wc -l $dpkg_all >> 'backup/update-log'
-
-
-# Update
-# dpkg-query -W -f='${Status} ${Package}\n' | grep "install ok installed" | awk '{print $4}' > $dpkg_all
-# echo 'Updated # of packages total:'
-# wc -l $dpkg_all
-#
-
+echo '>>>   Initial # of packages total:' >> $log
+wc -l $dpkg_all >> $log
 
 
 # Automatically installed dependencies
@@ -48,23 +54,14 @@ if ${dpkg_auto+"false"}; then
     touch "$dpkg_auto"
     fi
 fi
-echo '>>>   Initial # of dependecies:' >> 'backup/update-log'
-wc -l $dpkg_auto >> 'backup/update-log'
-
-
-# update
-# apt-mark showauto > $dpkg_auto
-# echo 'Updated # of dependecies:'
-# wc -l $dpkg_auto
+echo '>>>   Initial # of dependecies:' >> $log
+wc -l $dpkg_auto >> $log
 
 
 # Only manually installed packages
-
-# Check Initial
-
 dpkg_manual="backup/dpkg-manually-installed-packages"
 
-# # Check Initial
+# Check Initial
 if ${dpkg_manual+"false"}; then
     # la variable no está seteada
     echo "Please check file variable dpkg_manual."
@@ -77,14 +74,9 @@ if ${dpkg_manual+"false"}; then
     fi
 fi
 
-echo '>>>   Initial # of manually installed packages:' >> 'backup/update-log'
-wc -l $dpkg_manual >> 'backup/update-log'
+echo '>>>   Initial # of manually installed packages:' >> $log
+wc -l $dpkg_manual >> $log
 
-
-## Update
-# comm -23 $dpkg_all $dpkg_auto > $dpkg_manual
-# echo 'Updated # of manually installed packages:'
-# wc -l $dpkg_manual
 
 
 ##################
@@ -107,33 +99,64 @@ if ${snap_manual+"false"}; then
     touch "$snap_manual"
     fi
 fi
-echo '>>>   Initial # of snap packages:' >> 'backup/update-log'
-wc -l $snap_manual >> 'backup/update-log'
+echo '>>>   Initial # of snap packages:' >> $log
+wc -l $snap_manual >> $log
+
+# Manually installed flatpak packages
+# #
+flatpak_manual="backup/flatpak-manually-installed-packages"
+
+# # Check Initial
+if ${flatpak_manual+"false"}; then
+    # la variable no está seteada
+    echo "Please check file variable flatpak_manual."
+    return 1; else
+
+    if test ! -e "$flatpak_manual"; then
+    # files doesn't exists
+    # create it
+    touch "$flatpak_manual"
+    fi
+fi
+echo '>>>   Initial # of flatpak packages:' >> $log
+wc -l $flatpak_manual >> $log
+
+
+
+echo "--------------- End log ---------------" >> $log
+
+
+cat $log
 
 
 
 
+# Update $dpkg_all
+# dpkg-query -W -f='${Status} ${Package}\n' | grep "install ok installed" | awk '{print $4}' > $dpkg_all
+# echo 'Updated # of packages total:' >> $log
+# wc -l $dpkg_all >> $log
 
-## Update
+# Update $dpkg_auto
+# apt-mark showauto > $dpkg_auto
+# echo 'Updated # of dependecies:' >> $log
+# wc -l $dpkg_auto >> $log
+
+## Update $dpkg_manual
+# comm -23 $dpkg_all $dpkg_auto > $dpkg_manual
+# echo 'Updated # of manually installed packages:'  >> $log
+# wc -l $dpkg_manual >> $log
+
+## Update $snap_manual
 # snap list | grep -v Publisher | grep -v canonical | awk '{print $1}' | tail -n +2 >> $snap_manual
-# echo 'Updated # of manually installed packages:' >> 'backup/update-log'
-# wc -l $snap_manual >> 'backup/update-log'
+# echo 'Updated # of manually installed packages:' >> $log
+# wc -l $snap_manual >> $log
 
-
-
-
-## Update
+## Update $flatpak_manual
 # flatpak list --app  | awk '{print $1}' | tail -n +1 >> $flatpak_manual
-# echo 'Updated # of flatpak manually installed packages:' >> 'backup/update-log'
-# wc -l $flatpak_manual >> 'backup/update-log'
-
-echo "--------------- End log ---------------" >> 'backup/update-log'
+# echo 'Updated # of flatpak manually installed packages:' >> $log
+# wc -l $flatpak_manual >> $log
 
 
-echo 'backup/update-log'
-
-
-
-# Command for installation of manually installed packages list
+# Command for installation of dpkg manually installed packages list
 # xargs sudo apt install < $dpkg-manual
 
