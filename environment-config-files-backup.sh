@@ -17,3 +17,11 @@ cp ~/.Renviron backup/.Renviron
 cp ~/.gitconfig backup/.gitconfig
 # Para restaurar
 # cp ./backup/.gitconfig ~/.gitconfig
+
+
+
+# Other
+# ~/.config/autostart
+# específicamente: /etc/apt/sources.list.d/ubuntu.sources
+# en general: /etc/apt
+

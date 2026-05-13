@@ -173,6 +173,32 @@
 
 
 
+3.1.1 Dónde están las cosas que se instalaron?
+
+
+        #Esto escupe $PATH:
+        - /usr/local/sbin
+        - /usr/local/bin
+        - /usr/sbin
+        - /usr/bin
+        - /sbin
+        - /bin
+        - /usr/games
+        - /usr/local/games
+        - /snap
+        - /snap/bin
+        - /usr/local/lib
+        - /usr/lib
+        Revisar qué hay ahí #TBD
+
+#Encontré archivos .desktop acá:
+~/.local/share/applications
+/usr/share/applications$
+~/.config/autostart
+        ¿por qué se duplican? Esto es muy desprolijo #TBD
+        ¿por qué algunos dice Exec=path/a/un/binario y otros dicen Exec=nombre-de-la-aplicación? ¿a qué path está haciendo referencia? ¿o acaso será que hay ooooootro documento de configuración y estos son aliases?
+
+
 
 3.2. Repositorios
 	https://help.ubuntu.com/community/Repositories/Ubuntu
@@ -304,14 +330,16 @@
 	Instalo GitHub CLI (command gh) para que funcione como manager de credenciales. Puedo usar Git Credential Manager también como alternativa. A fines prácticos hoy por hoy las funcionalidades son idénticas
 	En el archivo ~/.gitconfig
 	>	[user]
-		name = Lucía Fresno
-		email = Lucíafresno@gmail.com
+		name = mi nombre
+		email = mi email
 		[credential "https://github.com"]
 		helper =
 		helper = !/usr/bin/gh auth git-credential
 		[credential "https://gist.github.com"]
 		helper =
 		helper = !/usr/bin/gh auth git-credential
+
+
 4.4.2 Datos
 	Alternativa a postman: hurl - instalado, por ser testeado #TBD
 
