@@ -206,15 +206,14 @@
 	#Repositorios permitidos
 	Podemos encontrar ls lista de repositorios acá.	Si alguno rompe las bolas con 404 o temas de claves GPG durante el proceso de "apt update" podemos borrarlo (o renombrarlo si somos más delicadas) desde
 	/etc/apt/sources.list.d/
-	/etc/apt/trusted.gpg.d/
 	Terminar #TBD
 
 	#GPG para repositorios
 	Encontramos NUESTRA Key acá:
-	/etc/apt/sources.list.d/ubuntu.sources
+		/usr/share/keyrings/
+		/etc/apt/trusted.gpg.d/
 	ver más en https://documentation.ubuntu.com/security/software-integrity/archive-verification/
 	Si no está necesitamos crearla con Keyring #TBD
-
 
 
 
@@ -226,6 +225,9 @@
 	>	alias [nombre_del_alias]="[path_a_la_aplicación]"
 	O si no desde la terminal con el comando
 	>	alias [nombre_corto]="[comando_largo_o_ruta_a_la_aplicación]"
+	Para listar los alias existentes simplemente
+	>	alias
+
 	Para eliminar esa asociación
 	>	unalias [alias_que_ya_no_quiero]
 
