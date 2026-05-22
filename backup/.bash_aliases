@@ -2,4 +2,6 @@ alias upup='sudo apt-get update -y && sudo apt-get upgrade -y'
 alias gitaddcomm='git add . && git commit -m '
 alias bitacora='cd ~/Repos/bitacora-linux && la'
 alias repos='cd ~/Repos && la'
-
+alias fixapt='sudo apt --fix-broken install'
+alias dpkgi='sudo dpkg -i '
+alias Rscript='/usr/local/bin/Rscript'

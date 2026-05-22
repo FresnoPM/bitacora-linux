@@ -24,3 +24,16 @@ mié 06 may 2026 22:55:00 -03
 >>>   Initial # of flatpak packages:
 10 backup/flatpak-manually-installed-packages
 --------------- End log ---------------
+--------------- Start log at: ---------------
+vie 22 may 2026 16:31:41 -03
+>>>   Initial # of packages total:
+2522 backup/dpkg-all-installed-packages
+>>>   Initial # of dependecies:
+2400 backup/dpkg-auto-installed-packages
+>>>   Initial # of manually installed packages:
+143 backup/dpkg-manually-installed-packages
+>>>   Initial # of snap packages:
+9 backup/snap-manually-installed-packages
+>>>   Initial # of flatpak packages:
+10 backup/flatpak-manually-installed-packages
+--------------- End log ---------------
