@@ -219,17 +219,24 @@
 
 3.3. Ejecución
 3.3.1. Alias
-	Genera un alias para abrir un archivo desde la terminal con una aplicación en particular o para correr cualquier comando largo
-
-	En el archivo ~/.bashrc se agrega una línea que diga
-	>	alias [nombre_del_alias]="[path_a_la_aplicación]"
-	O si no desde la terminal con el comando
-	>	alias [nombre_corto]="[comando_largo_o_ruta_a_la_aplicación]"
-	Para listar los alias existentes simplemente
+	Genera un alias para abrir un archivo desde la terminal con una aplicación en particular o para correr cualquier comando largo. Para listar los alias existentes simplemente llamamos desde la terminal a:
 	>	alias
 
-	Para eliminar esa asociación
+	Los aliases están almacenados en  ~/.bashrc, ~/.bash_aliases o ~/.zshrc de forma permanente (siguen ahí después de haber cerrado sesión y pueden ser modificados mientras se tengan permisos de escritura de estos archivos).
+	Conviene agregar nuevos aliases en el archivo ~/.bash_aliases por prolijidad y elegancia. Para que ese archivo cumpla su función deben leerse las siguientes líneas en el archivo ppal ~/.bashrc:
+	>	if [ -f ~/.bash_aliases ]; then
+	>		~/.bash_aliases
+	>	fi
+
+	En cualquiera de estos 3 archivos (preferentemente dentro de ~/.bash_aliases) se agrega una línea que diga:
+	>	alias [nombre_del_alias]="[path_a_la_aplicación]"
+	Al guardar y cerrar el archivo, los cambios se tomarán en la siguiente sesión de bash. Si queremos que tomen efecto en el momento corremos
+	>	source ~/.bash_aliases
+
+	Si sólo necesito un alias para la sesión actual y no me interesa conservarlo luego de cerrar la terminal puedo crear y eliminar alias temporales directo desde la línea de comandos
+	>	alias [nombre_corto]="[comando_largo_o_ruta_a_la_aplicación]
 	>	unalias [alias_que_ya_no_quiero]
+	Tanto la creación como la eliminación de aliases pierden efecto al cerrar la sesión de bash. Si queremos que los cambios sean definitivos debemos editar los archivos mencionados arriba.
 
 3.3.2. Apps que se abren al inicio y monitoreo de procesos
 	En el directorio ~/.config/autostart están los archivos .desktop que apuntan a cada app que se ejecuta al inicio. Hay otras ubicaciones. #TBD
