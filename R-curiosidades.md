@@ -1,3 +1,17 @@
+Este es un artículo muy interesante: https://statsandr.com/blog/an-efficient-way-to-install-and-load-r-packages/
+An efficient way to install and load R packages
+Antoine Soetewey 2020-01-31 6 minute read
+
+    R Tips Package 
+
+    What is a R package and how to use it?
+    Inefficient way to install and load R packages
+    More efficient way
+    Most efficient way
+        {pacman} package
+        {librarian} package
+    Conclusion
+
 
 
 
