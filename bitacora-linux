@@ -204,9 +204,8 @@
 	https://help.ubuntu.com/community/Repositories/Ubuntu
 
 	#Repositorios permitidos
-	Podemos encontrar ls lista de repositorios acá.	Si alguno rompe las bolas con 404 o temas de claves GPG durante el proceso de "apt update" podemos borrarlo (o renombrarlo si somos más delicadas) desde
-	/etc/apt/sources.list.d/
-	Terminar #TBD
+	Podemos encontrar l lista de repositorios acá: /etc/apt/sources.list.d/
+	#TBD
 
 	#GPG para repositorios
 	Encontramos NUESTRA Key acá:
