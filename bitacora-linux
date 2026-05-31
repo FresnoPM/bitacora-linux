@@ -2,6 +2,23 @@
 	Ubuntu Mate porque es ligero y porque lo recomienda Chomp. https://ubuntu-mate.org
 	Varias personas me recomendaron Linux Mint, la verdad es que me da mucha fiaca buscar alternativas si este ya funciona
 
+
+----------------------
+
+	2026 junio 
+Me compré una compu nueva, quiero instalarle linux pero no sé qué distribución usar, quiero que tire un tiempo así que no sé si tiene sentido agarrar algo así nomás, quiero que dure ... estoy evaluando varias opciones. Criterios clave:
+- Buen manejo de paquetes de R, CRAN, software como Rstudio
+- buen manejo de drivers (me dijeron que muchos tienen problemas con placas NVIDIA)
+
+
+Si fuera a seguir usando Ubuntu con desktop mate usaría la herramienta "Clonezilla" para llevar mi instalación actual (SO y disco) a la nueva compu. https://clonezilla.org/downloads.php?pubDate=20251129
+
+Acá hay un sitio que ofrece máquinas virtuales para testear y comparar diferentes distribuciones: https://distrosea.com/
+No sé cuánto se puede aprovechar esta info porque lo que yo quiero no se verifica así nomás en 5 minutos.
+
+---------------------
+
+
 2. Setup entorno
 2.1. Fondo de escritorio y pantalla de bloqueo (login), monitores
 	Para que un fondo de pantalla ancho se use en los 2 monitores hay que usar el estilo "Expandir"
