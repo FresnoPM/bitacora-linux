@@ -1,0 +1,6 @@
+buscar paquetes: 
+https://koji.fedoraproject.org/koji/api
+
+Instalar grupos de perfiles de trabajo 
+sudo dnf group list # para ver los ids disponibles
+sudo dnf group install id_de_grupo
