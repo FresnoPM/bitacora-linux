@@ -1,6 +1,17 @@
-buscar paquetes: 
+Buscar paquetes: 
 https://koji.fedoraproject.org/koji/api
 
 Instalar grupos de perfiles de trabajo 
-sudo dnf group list # para ver los ids disponibles
-sudo dnf group install id_de_grupo
+	$ sudo dnf group list # para ver los ids disponibles
+	$ sudo dnf group install id_de_grupo
+
+Cuando llegué no había ~/.bash_aliases y pensé que en vez se usaba ~/.bashrc.d pero no. Es otra cosa. No me queda muy claro qué se supone que tiene que hacer... la cuestión es que copié mi archivo .bash_aliases backupeado con amor desde ubuntu y agregué en el documento ~/.bashrc 
+	if [ -f ~/.bash_aliases ]; then
+		. ~/.bash_aliases
+	fi
+para que lo tome. RECORDATORIO: para poder usar el script inmediatamente sin abrir una nueva sesión de bash (nueva terminal) necesito correr esta línea para que lo tome:
+	$ source nombre_de_archivo
+
+Nano: para que el editor nano no exija scroll horizontal se crea el archivo "~/.nanorc" y se le agrega la única línea:
+	set softwrap
+y listo! Ni siquiera hay que agregarlo a .bashrc ni nada de eso.
