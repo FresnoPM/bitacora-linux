@@ -1,0 +1,18 @@
+Cuando tengo archivos locales que no coinciden con los que están en el repo remoto y quiero eliminar las modificaciones locales 
+Formas medio bestias pero efectivas para traer los datos remotos y sobreescribir los datos locales: 
+	$ git reset --hard origin/main
+	HEAD is now at b9ae4d5 cambio a "descripcion de último commit pusheado a main"
+
+Si estoy en "mi_rama" y quiero sobreescribir lo que tengo localmente con lo que está en main
+	$ git rebase main
+
+Discard local changes / Reset a file
+	$ git checkout -- <file>
+	$ git restore <file>
+
+
+Si quiero traer los commits realizados en rama "main" hacia "mi_rama" sin sobreescribir nada
+	$ git checkout mi_rama
+	$ git rebase main
+Esto guarda temporalmente mis commits, trae los cambios de main y luego reaplica mis commits en orden cronológico. Conviene usar este método sólo cuando se está a punto de mergear de forma coordinada con todo el equipo. Es muy complicado y vale la pena estudiarlo bien antes de meter la pata https://git-scm.com/docs/git-rebase. Otros métodos para hacer esto de forma más granular es git cherry-pick o git merge. 
+
