@@ -1,0 +1,39 @@
+17 oct 2026 instalé cachyOS en mi desktop porque Fedora no se estaba llevando bien con NVIDIA.
+Diferencias ppales: pacman en vez de dnf o de apt get, fish en vez de bash.
+Escritorio KDE Plasma.
+
+~/.bashrc:
+alias la='ls -a'
+alias gitaddcomm='git add . && git commit -m '
+alias bitacora='cd ~/Repos/bitacora-linux && la'
+alias repos='cd ~/Repos && la'
+alias fixapt='sudo pacman --fix-broken install'
+
+export HISTSIZE=-1
+export HISTFILESIZE=-1
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+~/.zshrc:
+source /usr/share/cachyos-zsh-config/cachyos-config.zsh
+
+Duda: ¿Cuál es la diferencia entre bash, fish y zsh?
+
+_____________________
+
+Instalación de aplicaciones
+CachyOS Package Manager (pacman), Shelly (AUR, Flatpak, AppImage), yey
+
+Multimedia: VLC y Stremio
+Código: R, Rstudio, GitHub-CLI
+Navegadores: Brave, Firefox, Chromium
+Social: Telegram, Discord, ZapZap (Whatsapp).
+ZapZap es un sandbox de flatpak dentro de Chrome que permite tener varias cuentas de Whatsappen la misma aplicación. Gasta una banda de memoria y, en comparación, tiene funcionalidades limitadas.
+
+
+______________________
+
+Me gustaría tener una forma sencilla de monitoreo de sistema, hay demasiados y no sé cómo aprovecharlos.
+
+Deseable:
+- recibir notificaciones por emails y eventos de googlecal y verlos en el calendario del system tray
+- estoy usando kate pero no me gusta porque estaba escribiendo, no sé cómo se cerró el archivo sin preguntar y perdí todo
