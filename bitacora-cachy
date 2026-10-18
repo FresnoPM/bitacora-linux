@@ -1,6 +1,32 @@
 17 oct 2026 instalé cachyOS en mi desktop porque Fedora no se estaba llevando bien con NVIDIA.
+
 Diferencias ppales: pacman en vez de dnf o de apt get, fish en vez de bash.
+
+Para saber cuál shell estoy usando
+> echo $0
+o en su defecto
+> echo $SHELL
+
+Para cambiar de shell
+> chsh -s /usr/bin/fish
+> chsh -s /usr/bin/bash
+> chsh -s /usr/bin/zsh
+
+
+
+Gestión de paquetes y Repositorios: /etc/pacman.conf, /etc/pacman.d/cachyos-repository.conf, /etc/pacman.d/mirrorlist y cachyos-mirrorlist
+Kernel y unidades de disco: /etc/default/grub o /boot/loader/entries/ , /etc/fstab
+
+
+
 Escritorio KDE Plasma.
+
+
+Configuraciones:
+mkdir ~/Repos
+git config --global user.email "luciafresno@gmail.com"
+git config --global user.name "Lucia Fresno"
+
 
 ~/.bashrc:
 alias la='ls -a'
@@ -12,9 +38,6 @@ alias fixapt='sudo pacman --fix-broken install'
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-
-~/.zshrc:
-source /usr/share/cachyos-zsh-config/cachyos-config.zsh
 
 Duda: ¿Cuál es la diferencia entre bash, fish y zsh?
 
@@ -32,8 +55,11 @@ ZapZap es un sandbox de flatpak dentro de Chrome que permite tener varias cuenta
 
 ______________________
 
-Me gustaría tener una forma sencilla de monitoreo de sistema, hay demasiados y no sé cómo aprovecharlos.
+###Deseable:
 
-Deseable:
-- recibir notificaciones por emails y eventos de googlecal y verlos en el calendario del system tray
-- estoy usando kate pero no me gusta porque estaba escribiendo, no sé cómo se cerró el archivo sin preguntar y perdí todo
+Guardar configuración estética: https://github.com/paju1986/PlasmaConfSaver/tree/master/com.pajuelo.plasmaConfSaver
+
+Me gustaría tener una forma sencilla de monitoreo de sistema, hay demasiados y no sé cómo aprovecharlos. El que más me viene gustando es BTOP. - #todo: investigar lo que ya hay y ver estos https://store.kde.org/browse?cat=425&ord=latest
+
+Recibir notificaciones por emails y eventos de googlecal y verlos en el calendario del system tray - esto me interesa https://store.kde.org/p/998901 #todo: revisarlo
+Estoy usando kate pero no me gusta porque estaba escribiendo, no sé cómo se cerró el archivo sin preguntar y perdí todo. No sé qué onda joplin. Si no puedo tener post its prefiero sublime text.
