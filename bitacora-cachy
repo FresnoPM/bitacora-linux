@@ -40,8 +40,7 @@ se puede programar una limpieza automática regular pero no conviene porque pued
 > IgnorePkg=[package_name]
 > NoUpgrade=[path/to/file1] [path/to/file2]
 
-
-otras cositas https://wiki.archlinux.org/title/Pacman/Tips_and_tricks
+Otras cositas interesantes sobre pacman https://wiki.archlinux.org/title/Pacman/Tips_and_tricks
 
 
 zsh no cuenta con los alias de bash así que tuve que escribírselos explícitamente
@@ -64,9 +63,13 @@ https://sw.kovidgoyal.net/kitty/overview/
 
 Quise instalar sublime-text que me gusta más que Kate (perdón, Kate, pero no guardás borradores y yo necesito eso) a través de pacman y a través de shelly pero no lo encontraban en su db, incluso después de correr > pacman -Fy. Tuve que agregar su clave pública > curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg y ahí apareció.
 
-Intalé algunos programitas lindos para matemáticas y otras yerbas:
+Instalé algunos programitas lindos para matemáticas y otras yerbas:
 yakuake, kmplot, kalm, cantor, artikulate, karlgebra
 
+
+Me gusta mucho los comics que ofrecen en https://store.kde.org/browse?cat=155&ord=latest y me encantaría poder poner los chistes de papá ahí
+
+Bugcito mini: en el gestor de tareas de la barra de abajo de la pantalla están los íconos de los programas abiertos y los pineados. Sublime no tiene ícono. Hay que ver si se puede arreglar. No me gusta nada.
 ____________________________________
 
 17 oct 2026
