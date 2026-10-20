@@ -1,4 +1,77 @@
-17 oct 2026 instalé cachyOS en mi desktop porque Fedora no se estaba llevando bien con NVIDIA.
+20 oct 2026
+
+tuve un problema en zsh: no me reconocía la contraseña para sudo
+lo resolví reiniciando y, desde la pantalla de Limine, eligiendo la opción S (Firmware setup) y metiéndome en la opción security y cambiando el Supervisor Password.
+
+Quise instalar teams-for-linux a través de Shelly pero había un conflicto de dependencias así que descargué el archivo .pkg.tar.zst y lo instalé desde la consola.
+
+#Comando básicos de pacman: https://wiki.archlinux.org/title/Pacman
+
+##Instalar paquetes:
+> pacman -S [package_name1] [package_name2] ...
+
+##Instalar un paquete local:
+> pacman -U [/path/to/package/package_name-version.pkg.tar.xz]
+
+##Instalar un paquete remoto
+> pacman -U [http://www.example.com/repo/example.pkg.tar.xz]
+
+##Instalar grupos de paquetes: https://archlinux.org/groups/
+> pacman -S [group_name]
+
+##Eliminar paquete, dejando intactas sus dependencias
+> pacman -R [package_name]
+
+##Eliminar paquete y sus dependencias también
+> pacman -Rs [package_name]
+
+##Buscar paquetes
+- Primero updatear db manualmente > pacman -F
+(o configurar un update automático con pacman-filesdb-refresh.timer)
+
+- Buscar paquetes ya instalados  > pacman -Qs [string1] [string2] ...
+- Buscar paquetes existentes > pacman -Ss [string1] [string2] ...
+
+##Limpiar caché de paquetes de forma manual:
+> paccache -r
+se puede programar una limpieza automática regular pero no conviene porque puede llegar a ser útil contar con versiones anteriores de algunos paquetes -no demasiado- viejos.
+
+##Evitar que un paquete se actualice
+> IgnorePkg=[package_name]
+> NoUpgrade=[path/to/file1] [path/to/file2]
+
+
+otras cositas https://wiki.archlinux.org/title/Pacman/Tips_and_tricks
+
+
+zsh no cuenta con los alias de bash así que tuve que escribírselos explícitamente
+~/.zshrc:
+alias la='ls -a'
+alias gitaddcomm='git add . && git commit -m '
+alias bitacora='cd ~/Repos/bitacora-linux && la'
+alias repos='cd ~/Repos && la'
+alias fixapt='sudo pacman --fix-broken install'
+
+me gustaría poder tener un resaldo de historial de comandos ilimitado pero es medio tricky así que lo veré en otra ocasión https://wiki.gentoo.org/wiki/Zsh/Guide#History
+
+cositas lindas para zsh:
+https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
+
+terminal Kitty para quienes usamos mucho la CLI
+https://sw.kovidgoyal.net/kitty/overview/
+
+
+Quise instalar sublime-text que me gusta más que Kate (perdón, Kate, pero no guardás borradores y yo necesito eso) a través de pacman y a través de shelly pero no lo encontraban en su db, incluso después de correr > pacman -Fy. Tuve que agregar su clave pública > curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg y ahí apareció.
+
+Intalé algunos programitas lindos para matemáticas y otras yerbas:
+yakuake, kmplot, kalm, cantor, artikulate, karlgebra
+
+____________________________________
+
+17 oct 2026
+
+instalé cachyOS en mi desktop porque Fedora no se estaba llevando bien con NVIDIA.
 
 Diferencias ppales: pacman en vez de dnf o de apt get, fish en vez de bash.
 
@@ -11,7 +84,6 @@ Para cambiar de shell
 > chsh -s /usr/bin/fish
 > chsh -s /usr/bin/bash
 > chsh -s /usr/bin/zsh
-
 
 
 Gestión de paquetes y Repositorios: /etc/pacman.conf, /etc/pacman.d/cachyos-repository.conf, /etc/pacman.d/mirrorlist y cachyos-mirrorlist
