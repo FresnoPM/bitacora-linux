@@ -1,3 +1,124 @@
+30 oct 2026
+stremio sigue teniendo problemas con pasar al siguiente capítulo en series, pero no es todo el tiempo... dejé de intentarlo, al menos ahora ya no se va a dormir durante la proyección
+
+24 oct 2026
+
+Situación: mientras veo algo en stremio, a pesar de estar en pantalla completa, luego de un rato la compu se pone a dormir
+
+Cambié las power settings para cuando está enchufada: do nothing no importa la cantidad de tiempo que estén inactivos los puertos de entrada (mouse o teclado). Esto no me gusta, creo que es muy valioso contar con que la laptop no va a seguir gastando recursos y mostrarse disponible a 3ros cuando no estoy ahí para desbloquearla. Como es una laptop que uso sola, decidí ignorar esto pero no es ideal. Lo dejé tal como estaba para cuando estaba usando energía de la corriente. 
+
+Ahora funciona muchísimo mejor que antes el uso de energía. Puedo dejarla desenchufada por horas sin problemas pero cuando la tengo enchufada luego de haber superado el 70% hace un ruido feo. Así que prefiero enchufarla por períodos cortos.
+
+Intenté agregar una línea en systemd-inhibit para stremio pero no lo tomó.
+Seguí este tutorial: https://github.com/Stremio/stremio-bugs/issues/2686
+Sirvió su propósito pero tuve que desactivarlo
+
+All correr el archivo tuve este stack de errores
+lfresno@fedora:~$ journalctl -p err -b
+"""
+Oct 24 19:50:14 fedora kernel: x86/cpu: VMX (outside TXT) disabled by BIOS
+Oct 24 19:50:14 fedora kernel: x86/cpu: SGX disabled or unsupported by BIOS.
+Oct 24 19:50:14 fedora systemd-tmpfiles[270]: /usr/lib/tmpfiles.d/tpm2-tss-fapi>
+Oct 24 19:50:14 fedora systemd-tmpfiles[270]: /usr/lib/tmpfiles.d/tpm2-tss-fapi>
+Oct 24 19:50:14 fedora systemd-tmpfiles[270]: /usr/lib/tmpfiles.d/tpm2-tss-fapi>
+Oct 24 19:50:14 fedora systemd-tmpfiles[270]: /usr/lib/tmpfiles.d/tpm2-tss-fapi>
+Oct 24 19:50:14 fedora systemd-udevd[373]: /usr/lib/udev/rules.d/60-tpm-udev.ru>
+Oct 24 19:50:14 fedora systemd-udevd[373]: /usr/lib/udev/rules.d/60-tpm-udev.ru>
+Oct 24 19:50:24 fedora kernel: ACPI BIOS Error (bug): AE_AML_BUFFER_LIMIT, Inde>
+Oct 24 19:50:24 fedora kernel: ACPI Error: Aborting method \_SB.WMID.WQBE due t>
+Oct 24 19:50:24 fedora kernel: ACPI BIOS Error (bug): AE_AML_BUFFER_LIMIT, Fiel>
+Oct 24 19:50:24 fedora kernel: ACPI Error: Aborting method \HWMC due to previou>
+Oct 24 19:50:24 fedora kernel: ACPI Error: Aborting method \_SB.WMID.WMAA due t>
+Oct 24 19:50:26 fedora kernel: Bluetooth: hci0: Reading supported features fail>
+Oct 24 19:50:26 fedora bluetoothd[1110]: Failed to set default system config fo>
+Oct 24 19:50:58 fedora sddm-helper[1401]: gkr-pam: unable to locate daemon cont>
+lines 1-16/16 (END)...skipping...
+Oct 24 19:50:14 fedora kernel: x86/cpu: VMX (outside TXT) disabled by BIOS
+Oct 24 19:50:14 fedora kernel: x86/cpu: SGX disabled or unsupported by BIOS.
+Oct 24 19:50:14 fedora systemd-tmpfiles[270]: /usr/lib/tmpfiles.d/tpm2-tss-fapi.conf:2: Failed to resolve user 'tss': Unknown user
+Oct 24 19:50:14 fedora systemd-tmpfiles[270]: /usr/lib/tmpfiles.d/tpm2-tss-fapi.conf:4: Failed to resolve user 'tss': Unknown user
+Oct 24 19:50:14 fedora systemd-tmpfiles[270]: /usr/lib/tmpfiles.d/tpm2-tss-fapi.conf:6: Failed to resolve group 'tss': Unknown group
+Oct 24 19:50:14 fedora systemd-tmpfiles[270]: /usr/lib/tmpfiles.d/tpm2-tss-fapi.conf:7: Failed to resolve group 'tss': Unknown group
+Oct 24 19:50:14 fedora systemd-udevd[373]: /usr/lib/udev/rules.d/60-tpm-udev.rules:3 Failed to resolve user 'tss', ignoring: Unknown user
+Oct 24 19:50:14 fedora systemd-udevd[373]: /usr/lib/udev/rules.d/60-tpm-udev.rules:4 Failed to resolve group 'tss', ignoring: Unknown group
+Oct 24 19:50:24 fedora kernel: ACPI BIOS Error (bug): AE_AML_BUFFER_LIMIT, Index (0x000000032) is beyond end of object (length 0x32) (20250807/exoparg2-393)
+Oct 24 19:50:24 fedora kernel: ACPI Error: Aborting method \_SB.WMID.WQBE due to previous error (AE_AML_BUFFER_LIMIT) (20250807/psparse-529)
+Oct 24 19:50:24 fedora kernel: ACPI BIOS Error (bug): AE_AML_BUFFER_LIMIT, Field [D008] at bit offset/length 128/8 exceeds size of target Buffer (128 bits) (20250807/dsopcode-198)
+Oct 24 19:50:24 fedora kernel: ACPI Error: Aborting method \HWMC due to previous error (AE_AML_BUFFER_LIMIT) (20250807/psparse-529)
+Oct 24 19:50:24 fedora kernel: ACPI Error: Aborting method \_SB.WMID.WMAA due to previous error (AE_AML_BUFFER_LIMIT) (20250807/psparse-529)
+Oct 24 19:50:26 fedora kernel: Bluetooth: hci0: Reading supported features failed (-16)
+Oct 24 19:50:26 fedora bluetoothd[1110]: Failed to set default system config for hci0
+Oct 24 19:50:58 fedora sddm-helper[1401]: gkr-pam: unable to locate daemon control file
+"""
+
+
+
+lfresno@fedora:~$ ./stremio-no-sleep.sh
+"""
+(node:4) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+(Use node --trace-deprecation ... to show where the warning was created)
+(node:4) [DEP0060] DeprecationWarning: The util._extend API is deprecated. Please use Object.assign() instead.
+(node:4) [DEP0040] DeprecationWarning: The punycode module is deprecated. Please use a userland alternative instead.
+Cannot load libcuda.so.1
+2026-10-24T22:57:44.227447Z ERROR stremio_linux_shell::app::webview: Failed to send message: TypeError: undefined is not a function
+(node:4) [DEP0044] DeprecationWarning: The util.isArray API is deprecated. Please use Array.isArray() instead.
+Error: stream ended
+    at Socket.onFinished (/app/libexec/stremio/server.js:81723:145)
+    at Socket.<anonymous> (node:internal/util:545:20)
+    at Socket.onfinish (node:internal/streams/end-of-stream:112:16)
+    at Socket.emit (node:events:518:28)
+    at Socket.emit (node:domain:489:12)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+Error: stream ended
+    at Socket.onFinished (/app/libexec/stremio/server.js:81723:145)
+    at Socket.<anonymous> (node:internal/util:545:20)
+    at Socket.onfinish (node:internal/streams/end-of-stream:112:16)
+    at Socket.emit (node:events:518:28)
+    at Socket.emit (node:domain:489:12)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-10-24T22:58:40.508129Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:58:40.601355Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:58:40.616629Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:58:40.657126Z  WARN stremio_linux_shell::app::ipc: Failed to convert IpcEvent to IpcMessageRequest: Invalid method: mpv-set-gpu-video-processing
+2026-10-24T22:58:40.657759Z  WARN stremio_linux_shell::app::video: Failed to set property vo: Unsupported
+2026-10-24T22:59:01.630637Z  WARN {}{task_name="org.freedesktop.portal.Request proxy caching"}: zbus::proxy: Failed to populate properties cache via GetAll: org.freedesktop.DBus.Error.UnknownMethod: Object does not exist at path “/org/freedesktop/portal/desktop/request/1_112/ashpd_E8VnkzDmj7”. Property change streams will not produce values.
+2026-10-24T22:59:35.014461Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:59:35.024663Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:59:35.138360Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:59:35.164289Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:59:35.168020Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:59:35.265288Z  WARN stremio_linux_shell::app::ipc: Failed to convert IpcEvent to IpcMessageRequest: Invalid method: mpv-set-gpu-video-processing
+2026-10-24T22:59:35.267421Z  WARN stremio_linux_shell::app::video: Failed to set property vo: Unsupported
+2026-10-24T22:59:37.899688Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:59:37.900794Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:59:37.906357Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:59:37.934083Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:59:37.939394Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T22:59:37.966747Z  WARN stremio_linux_shell::app::ipc: Failed to convert IpcEvent to IpcMessageRequest: Invalid method: mpv-set-gpu-video-processing
+2026-10-24T22:59:37.967058Z  WARN stremio_linux_shell::app::video: Failed to set property vo: Unsupported
+2026-10-24T23:00:12.766947Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T23:00:28.158584Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T23:00:28.206403Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T23:00:28.209712Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+2026-10-24T23:00:28.223206Z  WARN stremio_linux_shell::app::ipc: Failed to convert IpcEvent to IpcMessageRequest: Invalid method: mpv-set-gpu-video-processing
+2026-10-24T23:00:28.223435Z  WARN stremio_linux_shell::app::video: Failed to set property vo: Unsupported
+2026-10-24T23:00:29.281261Z  WARN {}{task_name="org.freedesktop.portal.Request proxy caching"}: zbus::proxy: Failed to populate properties cache via GetAll: org.freedesktop.DBus.Error.UnknownMethod: Object does not exist at path “/org/freedesktop/portal/desktop/request/1_112/ashpd_jL5c6kdnFd”. Property change streams will not produce values.
+2026-10-24T23:00:41.401479Z  WARN stremio_linux_shell::app::video: Failed to set property sub-ass-force-margins: Unsupported
+^Cbash terminated by signal INT.
+"""
+Eliminé el archivo. Stremio sigue teniendo problemas para pasar al siguiente episodio y encontré testimonios de que esto está pasando en varios usuarios.
+
+
+
+17 oct 2026
+Instalé Fedora en la laptop 
+
+
+_______________________________
+
+
 Buscar paquetes: 
 https://koji.fedoraproject.org/koji/api
 

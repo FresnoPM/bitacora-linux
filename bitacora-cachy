@@ -1,3 +1,58 @@
+30 oct 2026
+el ícono de cachy updates hoy se despertó con el ícono rojo, lo abrí, descargó e instaló todo lo que hacía falta y, cuando terminó, volvió a estar negro. Ideal: que sea blanco/negro según el theme del sistema pero por ahora creo que está bien.
+
+
+26 oct 2026
+Desactivé Kde-Wallet porque me pedía contraseñas todo el tiempo. Creo que puede ser útil tener un password manager pero primero queiero asegurarme de que voy a seguir usando este OS.
+
+Desde Zapzap no se puede ver el entorno del escritorio ni era posible usar las acciones de ventana como llevando el mouse a los bordes.
+Encontré esto: https://github.com/electron/electron/issues/36768#issuecomment-4361836574 pero no me sirvió porque el problema sucede en fullscreen y se hizo tarde para terminar de resolverlo. Queda pendiente.
+
+Steam anda ok
+
+Updateé varias aplicaciones desde shelly por demanda mía, hubiera preferido enterarme de que había actualizaciones disponibles. Corrí $ systemctl --user edit --full arch-update.timer
+
+[Unit]
+Description=Run arch-update auto check at boot and then once a day
+
+[Timer]
+OnStartupSec=2min
+RandomizedDelaySec=1h
+OnUnitActiveSec=12h # <<--- cambié esto
+
+[Install]
+WantedBy=timers.target
+
+Quisiera que el ícono de Cachy updates aparezca únicamente en el system tray cuando hay actualizaciones disponibles y se mantenga oculto el resto del tiempo. Probé $ sudo pacman -Syu cachy-update python-pyqt6
+
+Siguiendo este artículo https://github.com/Antiz96/arch-update/blob/main/doc/man/arch-update.conf.5.scd con $ arch-update --edit-config 
+modifiqué TrayIconStyle=dark (default="blue") y funcionó: al no haber updates queda en un color negro que apenas se ve en la bandeja de sistema. Tanto cachyupdate como zapzap tienen configurado "show when relevant". Yo creo que si no hay notificaciones no es relevante pero me parece que es un bug de la versión. ojalá algún día arreglen eso porque es re incómodo.
+
+Ahora dudo de si no tengo simultáneamente el cachy-update y el  arch-update o si es lo mismo. Estoy muy cansada para seguir hoy ... vamos a ver qué pasa en unos días cuando haya algo que actualizar.
+
+$ nano arch-update-tray.desktop
+Agregué abajo de todo la línea "Hidden=true" y luego restarteé el actualizador con:
+$ pkill -f arch-update-tray
+$ cachy-update -c
+
+no aparece en en tray, no aparece en el popup menú del tray... esperaremos a ver si en un par de días aparece 
+
+
+
+
+Startup apps: system-settings/autostart puse cachyupdate, yakuake, telegram y zapzap.
+
+
+Desde Cachy Hello activé profile-sync-daemon para optimizar el uso de RAM en navegadores. Desactivé bluetooth porque no lo uso acá y Bpftune porqeu dice la internet que al toquetear cosas de sistema se hace muy complicado debuggear después.
+
+_______________________________
+21 oct 2026
+update grande de sistema
+
+instalé steam desde shelly, sin problemas. Me dio a elegir algunas librerías opcionales que no sé muy bien de qué se trataban 
+al abrirlo me encoló las siguientes descargas: steam linux runtime 4.0, proton experimental y steamworks common redistributables
+jugué un partidito de AOE II y anduvo todo de primera!
+____________________________________
 20 oct 2026
 
 tuve un problema en zsh: no me reconocía la contraseña para sudo
