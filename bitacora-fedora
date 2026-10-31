@@ -1,3 +1,52 @@
+31 oct 2026
+
+	mkdir ~/Repos
+	git config --global user.email "luciafresno@gmail.com"
+	git config --global user.name "Lucia Fresno"
+
+	sudo dnf install gh
+	sudo gh auth
+	gh repo clone FresnoPM/bitacora-linux
+
+dentro de ~/.bashrc
+
+	# User specific aliases and functions
+	if [ -d ~/.bashrc.d ]; then
+	    for rc in ~/.bashrc.d/*; do
+	        if [ -f "$rc" ]; then
+	            . "$rc"
+	        fi
+	    done
+	fi
+
+dentro de ~/bashrc.d/ puse 2 archivos: "bash_extras" y "bash_aliases". Importante notar que los archivos no empiezan con punto ".". Si empezaran con punto tendría que modificar el archivo .bashrc en el bloque que los carga 
+
+dentro de ~/bashrc.d/bash_extras:
+
+	export HISTSIZE=-1
+	export HISTFILESIZE=-1
+	export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+	# wrap line Correcto (ajusta perfectamente):
+	PS1="\[\e[32m\]\u@\h:\w\$ "
+
+dentro de ~/.bashrc.d/bash_aliases:
+
+	alias la='ls -a'
+	alias gitaddcomm='git add . && git commit -m '
+	alias bitacora='cd ~/Repos/bitacora-linux && la'
+	alias repos='cd ~/Repos && la'
+
+dentro de ~/.nanorc:
+	set softwrap
+
+
+Quise instalar guake pero estaba todo buggeado> no reconocía el atajo F12 (ni idea a qué acción está asignado pero ya no tengo más ganas de averiguar) y quedaba fijo en el medio de la pantalla a pesar de que en su configuración decía que estaba arriba. También ignoraba la instrucción de que no se oculte cuando perdía foco, lo cual era especialmente irritante ya que no funciona el atajo de hacerlo visible con F12. Chau y a otra cosa.
+
+Para cambiar el layout del teclado y lenguaje del sistema, como no tenía la opción desde el panel de configuración (establecido originalmente en inglés)
+	sudo localectl set-keymap es
+
+
 30 oct 2026
 stremio sigue teniendo problemas con pasar al siguiente capítulo en series, pero no es todo el tiempo... dejé de intentarlo, al menos ahora ya no se va a dormir durante la proyección
 
