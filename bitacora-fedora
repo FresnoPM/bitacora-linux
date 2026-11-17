@@ -1,3 +1,16 @@
+17 nov 2026 
+instalé los dnf-plugins-core https://packages.fedoraproject.org/pkgs/dnf-plugins-core/dnf-plugins-core/ y también agregué el repo de snap
+instalé el brave-browser y la aplicación d elinea de comandos de ddgr
+
+dentro de ~/.bashrc.d/bash_aliases
+	alias upup='sudo dnf upgrade --refresh'
+para las actualizaciones diarias porque me tiene REPODRIDA el diálogo de actualizaciones de dnfdragora
+
+dentro de 
+
+
+
+
 31 oct 2026
 
 	mkdir ~/Repos
@@ -36,6 +49,8 @@ dentro de ~/.bashrc.d/bash_aliases:
 	alias gitaddcomm='git add . && git commit -m '
 	alias bitacora='cd ~/Repos/bitacora-linux && la'
 	alias repos='cd ~/Repos && la'
+
+Más cositas para configurar bash https://www.faqs.org/docs/Linux-HOWTO/Bash-Prompt-HOWTO.html 
 
 dentro de ~/.nanorc:
 	set softwrap
