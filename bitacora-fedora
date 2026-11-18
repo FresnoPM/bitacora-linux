@@ -1,15 +1,42 @@
 17 nov 2026 
+
+
 instalé los dnf-plugins-core https://packages.fedoraproject.org/pkgs/dnf-plugins-core/dnf-plugins-core/ y también agregué el repo de snap
 instalé el brave-browser y la aplicación d elinea de comandos de ddgr
 
 dentro de ~/.bashrc.d/bash_aliases
-	alias upup='sudo dnf upgrade --refresh'
-para las actualizaciones diarias porque me tiene REPODRIDA el diálogo de actualizaciones de dnfdragora
+	alias upup='sudo dnf upgrade --refresh'  # para las actualizaciones diarias porque me tiene REPODRIDA el diálogo de actualizaciones de dnfdragora
+	alias ddgr='ddgr -x' # para que muestre las URLs completas 
 
-dentro de 
+upgradeé a la versión fedora-45
+
+instalé "feh" porque Gpicview crasheaba TODO EL TIEMPO ¡¿¡¿cómo puede ser que no anden las cosas más básicas como abrir una imagen!?!?!
+Tampoco se puede agregar una nueva imagen como fondo de escritorio, o sea, la funcionalidad está pero no anda. Sólo se puede elegir entre una de las precargadas. Ni siquiera se puede quitar y dejar un color sólido. Este minimalismo sí que se puede ver!
+
+
+OJO: Estamos usando Wayland (default display server para fedora) con Budgie (chosen desktop environment)... checkear con el comando
+	echo $XDG_SESSION_TYPE
+	echo $XDG_CURRENT_DESKTOP
+
+Instalé Kitty terminal emulator. Es muy lindo. El archivo de config se abre con ctrl+shift+F2 y los cambios se implementan con ctrl+shift+F5. 
+Para cambiar themes, desde dentro de Kitty, se corre:
+>	kitten themes
+
+Crear nuevos tabs: ctrl+shift+t
+Cerrar tab actual: ctrl+shift+q
+Navegar entre tabs: ctrl+shift+tab ó ctrl+tab
+
+Crear nuevo panel (dentro del tab actual): ctrl+shift+enter
+Cerrar panel actual: ctrl+shift+w
+Navegar entre paneles (dentro del tab actual): alt+flechita(arriba, abajo, derecha, izquierda)
+
+
+Seguí este tutorial https://www.youtube.com/watch?v=68v2JqE8fVQ&t=210s (es un poco largo pero es lindo para la primera vez). Su config file acá: https://gitlab.com/aalansloz/my_configs_linux/-/blob/main/kitty/kitty.conf?ref_type=heads
 
 
 
+
+Instalé el gnome-font-viewer (a través de snapd) y unas cuantas fuentes con ligaturas para jugar con la interfaz de kitty. 
 
 31 oct 2026
 
